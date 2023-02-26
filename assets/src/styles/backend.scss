@@ -1,0 +1,13 @@
+// General rules
+@import "./init";
+
+.#{$namespace-admin} {
+	.block-editor,
+	.blocks-widgets-container {
+		[class*="wp-block-david-ev-asm-block"] {
+			.editor-inner {
+				width: 100%;
+			}
+		}
+	}
+}

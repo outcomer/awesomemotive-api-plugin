@@ -1,0 +1,29 @@
+{
+  "include": [
+    "./webpack.config.base.ts",
+    "./webpack.config.dev.ts",
+    "./webpack.config.prod.ts"
+  ],
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "target": "es5",
+    "sourceMap": true,
+    "allowJs": true,
+    "lib": [
+      "es2018",
+      "ES2021.String",
+      "dom"
+    ]
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS",
+      "lib": [
+        "es2018",
+        "ES2021.String",
+        "dom"
+      ]
+    },
+  },
+}

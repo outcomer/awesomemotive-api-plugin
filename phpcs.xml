@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<ruleset name="WP-Enforcer">
+	<description>Coding standards from WP Enforcer.</description>
+
+	<!-- FILES -->
+	<exclude-pattern>phpcs.xml</exclude-pattern>
+	<exclude-pattern>*\.js$</exclude-pattern> <!-- WP Inspector does not handle ES6 very well -->
+	<exclude-pattern>./vendor</exclude-pattern>
+	<exclude-pattern>./node_modules</exclude-pattern>
+	<exclude-pattern>./assets/dist</exclude-pattern>
+
+	<!-- Disallow long array syntax -->
+	<rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+
+	<!-- Allow short array syntax -->
+	<rule ref="Generic.Arrays.DisallowShortArraySyntax.Found">
+		<severity>0</severity>
+	</rule>
+
+	<!-- Ignore unused $vars -->
+	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter.FoundBeforeLastUsed">
+		<severity>0</severity>
+	</rule>
+
+	<config name="testVersion" value="8.1-"/>
+	<rule ref="PHPCompatibilityWP">
+		<include-pattern>*\.php$</include-pattern>
+	</rule>
+
+	<rule ref="WordPress-Core" />
+	<rule ref="WordPress-Extra" />
+	<rule ref="WordPress-Docs" />
+
+	<!-- Some rules that WP does not support --> 
+	<rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint"/>
+	<rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing"/>
+	<rule ref="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue"/>
+
+	<!-- Allow useless return tag -->
+	<rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint.UselessAnnotation">
+		<severity>0</severity>
+	</rule>
+
+	<!-- Allow simple return tag -->
+	<rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification">
+		<severity>0</severity>
+	</rule>
+
+	<!-- Ignore some WP rules for doc blocks and type hinting. Must be after WordPress-Docs  -->
+	<rule ref="Squiz.Commenting.FunctionComment.ParamCommentNotCapital">
+		<severity>5</severity>
+	</rule>
+
+	<rule ref="Squiz.Commenting.FunctionComment.SpacingAfterParamName">
+		<severity>5</severity>
+	</rule>
+
+	<rule ref="Squiz.Commenting.DocCommentAlignment.SpaceAfterStar">
+		<severity>5</severity>
+	</rule>
+
+	<rule ref="Squiz.Commenting.FunctionComment.ScalarTypeHintMissing">
+		<severity>5</severity>
+	</rule>
+
+	<rule ref="Squiz.Commenting.FunctionComment.TypeHintMissing">
+		<severity>5</severity>
+	</rule>
+
+	<rule ref="Generic.Commenting.DocComment.ParamGroup">
+		<severity>5</severity>
+	</rule>
+
+	<rule ref="Generic.Commenting.DocComment.TagsNotGrouped">
+		<severity>5</severity>
+	</rule>
+
+	<rule ref="Squiz.Commenting.FunctionComment.MissingReturn">
+		<severity>5</severity>
+	</rule>
+	
+	<rule ref="Squiz.Commenting.FunctionComment.MissingReturn">
+		<severity>5</severity>
+	</rule>
+</ruleset>
