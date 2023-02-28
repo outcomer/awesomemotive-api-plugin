@@ -43,9 +43,9 @@ class David_Ev_Asm_Block_Factory {
 	 * David_Ev_Asm_Block_Factory Instance.
 	 * Ensures only one instance of David_Ev_Asm_Block_Factory is loaded or can be loaded.
 	 *
-	 * @return David_Ev_Asm_Block_Factory Instance.
+	 * @return self Instance.
 	 */
-	public static function instance(): David_Ev_Asm_Block_Factory {
+	public static function instance(): self {
 
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();

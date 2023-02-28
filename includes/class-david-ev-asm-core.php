@@ -5,7 +5,7 @@
  * @package DavidEvAsmApiPlugin
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace DavidEv\Asm\ApiPlugin\Includes;
 
@@ -47,9 +47,9 @@ final class David_Ev_Asm_Core extends David_Ev_Asm_Modules {
 	 * Main David_Ev_Asm_Core Instance.
 	 * Ensures only one instance of David_Ev_Asm_Core is loaded or can be loaded.
 	 *
-	 * @return David_Ev_Asm_Core Main instance.
+	 * @return self Main instance.
 	 */
-	public static function instance(): David_Ev_Asm_Core {
+	public static function instance(): self {
 
 		if ( is_null( self::$instance ) ) {
 

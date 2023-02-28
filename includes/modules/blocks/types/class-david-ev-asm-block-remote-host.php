@@ -13,9 +13,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use DavidEv\Asm\ApiPlugin\Includes\Modules\Blocks\David_Ev_Asm_Block_Abstract;
+use DavidEv\Asm\ApiPlugin\Includes\{
+	Modules\Blocks\David_Ev_Asm_Block_Abstract,
+	Storage\David_Ev_Asm_Org_Repository as Repository,
+	Storage\David_Ev_Asm_Org_Api_Client as Api_Client,
+	Storage\David_Ev_Asm_Org_Db_Cache as Cache_Provider,
+};
 use ReflectionClass;
 use WP_REST_Request;
+use Throwable;
 
 /**
  * David_Ev_Asm_Block_Remote_Host class.
@@ -25,15 +31,24 @@ use WP_REST_Request;
 class David_Ev_Asm_Block_Remote_Host extends David_Ev_Asm_Block_Abstract {
 
 	/**
+	 * Data provider.
+	 *
+	 * @var David_Ev_Asm_Org_Repository
+	 */
+	private Repository $repository;
+
+	/**
 	 * David_Ev_Asm_Block_Remote_Host Constructor
 	 *
 	 * @return void
 	 */
 	public function __construct() {
 
-		add_action( 'rest_api_init', [ $this, 'rest' ] );
-
 		$prefix = DAVID_E_ASM_ASSET_NAME_PREFIX;
+		$class  = new ReflectionClass( $this );
+
+		$cache_provider = new Cache_Provider();
+		$api_client     = new Api_Client( $cache_provider );
 
 		$this->block_assets = [
 			'editor_script' => [
@@ -54,12 +69,27 @@ class David_Ev_Asm_Block_Remote_Host extends David_Ev_Asm_Block_Abstract {
 			],
 		];
 
-		$class_name = ( new ReflectionClass( $this ) )->getShortName();
+		$this->repository = new Repository( $api_client );
 
 		$this
-			->set_block_name_from_class( $class_name )
+			->set_block_name_from_class( $class->getShortName() )
 			->register_block_type()
-			->register_block_assets();
+			->register_block_assets()
+			->hooks();
+	}
+
+	/**
+	 * Actions callbacks for access
+	 * block content from admin and front
+	 *
+	 * @return void
+	 */
+	protected function hooks(): void {
+		$action = $this->get_blockname_full();
+
+		add_action( 'rest_api_init', [ $this, 'rest' ] );
+		add_action( "wp_ajax_{$action}", [ $this, 'ajax' ], 10 );
+		add_action( "wp_ajax_nopriv_{$action}", [ $this, 'ajax' ], 10 );
 	}
 
 	/**
@@ -82,6 +112,7 @@ class David_Ev_Asm_Block_Remote_Host extends David_Ev_Asm_Block_Abstract {
 
 	/**
 	 * Route for block content.
+	 * Works in wp-admin only.
 	 *
 	 * @return void
 	 */
@@ -93,20 +124,26 @@ class David_Ev_Asm_Block_Remote_Host extends David_Ev_Asm_Block_Abstract {
 			"{$prefix}/v1",
 			"/{$this->block_name}",
 			[
-				'methods'             => 'POST',
-				'permission_callback' => function ( WP_REST_Request $request ) {
+				'methods'             => 'GET',
+				'permission_callback' => function ( WP_REST_Request $request ): bool {
 					return current_user_can( 'edit_others_posts' );
 				},
-				'callback'            => function ( WP_REST_Request $request ) {
-
-					$return = [
-						'content' => wp_json_encode( [ '"aqweqweqw": "hjkhjklhjkh"' ] ),
-					];
-
-					return $return;
+				'callback'            => function ( WP_REST_Request $request ): array {
+					return $this->respond_content_request();
 				},
 			]
 		);
+	}
+
+	/**
+	 * Route for block content.
+	 * Works in wp-admin & front.
+	 *
+	 * @return void
+	 */
+	public function ajax(): void {
+		check_ajax_referer( 'frontendAjax', 'nonce' );
+		wp_send_json_success( $this->respond_content_request() );
 	}
 
 	/**
@@ -118,8 +155,33 @@ class David_Ev_Asm_Block_Remote_Host extends David_Ev_Asm_Block_Abstract {
 	 *
 	 * @return string
 	 */
-	public function render( array $attributes, ?string $content = null ): string {
-		return 'RENDER';
-		return $this->output( $attributes, $render, $this->refer_widget );
+	public function render( array $attributes, ?string $content = null ): ?string {
+		ob_start();
+		?>
+		<div class="david-ev-asm-block" data-name="<?php echo esc_html( $this->get_blockname_full() ); ?>">
+			<div class="block-loader"><div class="loading"><i></i><i></i><i></i><i></i></div></div>
+		</div>
+		<?php
+		return ob_get_clean();
+	}
+
+	/**
+	 * Prepare content request structure.
+	 *
+	 * @return array
+	 */
+	private function respond_content_request(): array {
+		try {
+			$code        = 200;
+			$remote_data = $this->repository->get_persons();
+		} catch ( Throwable $e ) {
+			$code        = 400;
+			$remote_data = $e->getMessage();
+		}
+
+		return [
+			'code'    => $code,
+			'content' => $remote_data,
+		];
 	}
 }

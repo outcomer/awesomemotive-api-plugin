@@ -9,8 +9,6 @@ declare(strict_types = 1);
 
 namespace DavidEv\Asm\ApiPlugin\Includes\Modules\Config;
 
-use WP_Error;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -93,6 +91,11 @@ class David_Ev_Asm_Assets {
 			'ajaxUrl'         => admin_url( 'admin-ajax.php', 'relative' ),
 			'davidEvAsmNonce' => wp_create_nonce( 'asm_plugin_ajax' ),
 			'scriptDebug'     => SCRIPT_DEBUG,
+			'pluginNonce'     => wp_create_nonce( 'frontendAjax' ),
+			'cssNamespaces'   => [
+				'admin' => DAVID_E_ASM_NAMESPACE_ADMIN,
+				'front' => DAVID_E_ASM_NAMESPACE_FRONT,
+			],
 		];
 
 		ob_start();
@@ -118,6 +121,10 @@ class David_Ev_Asm_Assets {
 			'ajaxUrl'         => admin_url( 'admin-ajax.php', 'relative' ),
 			'davidEvAsmNonce' => wp_create_nonce( 'asm_plugin_ajax' ),
 			'scriptDebug'     => SCRIPT_DEBUG,
+			'cssNamespaces'   => [
+				'admin' => DAVID_E_ASM_NAMESPACE_ADMIN,
+				'front' => DAVID_E_ASM_NAMESPACE_FRONT,
+			],
 		];
 
 		ob_start();

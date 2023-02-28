@@ -5,7 +5,7 @@
  * @package DavidEvAsmApiPlugin
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace DavidEv\Asm\ApiPlugin\Includes;
 

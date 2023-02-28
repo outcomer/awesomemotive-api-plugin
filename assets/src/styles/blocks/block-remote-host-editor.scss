@@ -1,7 +1,6 @@
 @import "../init";
 .#{$namespace-admin} {
-	.block-editor,
-	.blocks-widgets-container {
+	.block-editor {
 		[class*="wp-block-david-ev-asm-block-remote-host"] {
 			.editor-inner {
 				width: 100%;

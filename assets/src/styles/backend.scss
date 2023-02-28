@@ -2,11 +2,17 @@
 @import "./init";
 
 .#{$namespace-admin} {
-	.block-editor,
-	.blocks-widgets-container {
+	.block-editor {
 		[class*="wp-block-david-ev-asm-block"] {
 			.editor-inner {
 				width: 100%;
+			}
+
+			.editor-errors {
+				width: 100%;
+				background-color: #ffb0b0;
+				padding: 0 1em;
+				border-left: 4px solid red;
 			}
 		}
 	}

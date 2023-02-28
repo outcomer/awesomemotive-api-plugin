@@ -74,6 +74,14 @@ abstract class David_Ev_Asm_Block_Abstract {
 	abstract protected function get_attributes(): array;
 
 	/**
+	 * Actions callbacks for access
+	 * block content from admin and front
+	 *
+	 * @return void
+	 */
+	abstract protected function hooks(): void;
+
+	/**
 	 * Register block in WP.
 	 *
 	 * @return self
@@ -103,7 +111,7 @@ abstract class David_Ev_Asm_Block_Abstract {
 		}
 
 		register_block_type(
-			self::BLOCKS_NAMESPACE . '/' . $this->block_name,
+			$this->get_blockname_full(),
 			array_merge(
 				[
 					'render_callback' => [ $this, 'render' ],
@@ -114,6 +122,15 @@ abstract class David_Ev_Asm_Block_Abstract {
 		);
 
 		return $this;
+	}
+
+	/**
+	 * Returns fully qualified block name.
+	 *
+	 * @return string
+	 */
+	protected function get_blockname_full(): string {
+		return self::BLOCKS_NAMESPACE . '/' . $this->block_name;
 	}
 
 	/**

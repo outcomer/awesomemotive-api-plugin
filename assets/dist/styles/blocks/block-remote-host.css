@@ -1,7 +1,41 @@
 /*!********************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!../node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/styles/blocks/block-remote-host.scss ***!
   \********************************************************************************************************************************************************************************************************************************************************************/
-/* stylelint-disable block-no-empty */
-/* stylelint-enable block-no-empty */
+.david-ev-asm-api-plugin-front table {
+  border-spacing: 1;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+.david-ev-asm-api-plugin-front table td,
+.david-ev-asm-api-plugin-front table th {
+  padding-left: 8px;
+  text-align: left;
+}
+.david-ev-asm-api-plugin-front table thead tr {
+  height: 60px;
+  background: #d7d7d7;
+}
+.david-ev-asm-api-plugin-front table tbody tr {
+  height: 50px;
+}
+.david-ev-asm-api-plugin-front table tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+.david-ev-asm-api-plugin-front table tbody tbody tr {
+  font-size: 15px;
+  color: gray;
+  line-height: 1.2;
+  font-weight: unset;
+}
+.david-ev-asm-api-plugin-front table tbody tr:hover {
+  color: #555;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
 
-/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3R5bGVzL2Jsb2Nrcy9ibG9jay1yZW1vdGUtaG9zdC5jc3MiLCJtYXBwaW5ncyI6Ijs7O0FBRUE7QUFLQSxxQyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9zdHlsZXMvYmxvY2tzL2Jsb2NrLXJlbW90ZS1ob3N0LnNjc3MiXSwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCBcIi4uL2luaXRcIjtcblxuLyogc3R5bGVsaW50LWRpc2FibGUgYmxvY2stbm8tZW1wdHkgKi9cbi4jeyRuYW1lc3BhY2UtZnJvbnR9IHtcblxufVxuXG4vKiBzdHlsZWxpbnQtZW5hYmxlIGJsb2NrLW5vLWVtcHR5ICovXG4iXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=*/
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3R5bGVzL2Jsb2Nrcy9ibG9jay1yZW1vdGUtaG9zdC5jc3MiLCJtYXBwaW5ncyI6Ijs7O0FBR0M7RUFDQztFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0FBRkY7QUFJRTs7RUFFQztFQUNBO0FBRkg7QUFLRTtFQUNDO0VBQ0E7QUFISDtBQU1FO0VBQ0M7QUFKSDtBQU9FO0VBQ0M7QUFMSDtBQVFFO0VBQ0M7RUFDQTtFQUNBO0VBQ0E7QUFOSDtBQVNFO0VBQ0M7RUFDQTtFQUNBO0FBUEgsQyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9zdHlsZXMvYmxvY2tzL2Jsb2NrLXJlbW90ZS1ob3N0LnNjc3MiXSwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCBcIi4uL2luaXRcIjtcblxuLiN7JG5hbWVzcGFjZS1mcm9udH0ge1xuXHR0YWJsZSB7XG5cdFx0Ym9yZGVyLXNwYWNpbmc6IDE7XG5cdFx0Ym9yZGVyLWNvbGxhcHNlOiBjb2xsYXBzZTtcblx0XHRiYWNrZ3JvdW5kOiAjZmZmO1xuXHRcdGJvcmRlci1yYWRpdXM6IDZweDtcblx0XHRvdmVyZmxvdzogaGlkZGVuO1xuXHRcdHdpZHRoOiAxMDAlO1xuXHRcdG1hcmdpbjogMCBhdXRvO1xuXHRcdHBvc2l0aW9uOiByZWxhdGl2ZTtcblxuXHRcdHRkLFxuXHRcdHRoIHtcblx0XHRcdHBhZGRpbmctbGVmdDogOHB4O1xuXHRcdFx0dGV4dC1hbGlnbjogbGVmdDtcblx0XHR9XG5cblx0XHR0aGVhZCB0ciB7XG5cdFx0XHRoZWlnaHQ6IDYwcHg7XG5cdFx0XHRiYWNrZ3JvdW5kOiAjZDdkN2Q3O1xuXHRcdH1cblxuXHRcdHRib2R5IHRyIHtcblx0XHRcdGhlaWdodDogNTBweDtcblx0XHR9XG5cblx0XHR0cjpudGgtY2hpbGQoZXZlbikge1xuXHRcdFx0YmFja2dyb3VuZC1jb2xvcjogI2Y1ZjVmNTtcblx0XHR9XG5cblx0XHR0Ym9keSB0Ym9keSB0ciB7XG5cdFx0XHRmb250LXNpemU6IDE1cHg7XG5cdFx0XHRjb2xvcjogZ3JheTtcblx0XHRcdGxpbmUtaGVpZ2h0OiAxLjI7XG5cdFx0XHRmb250LXdlaWdodDogdW5zZXQ7XG5cdFx0fVxuXG5cdFx0dGJvZHkgdHI6aG92ZXIge1xuXHRcdFx0Y29sb3I6ICM1NTU7XG5cdFx0XHRiYWNrZ3JvdW5kLWNvbG9yOiAjZjVmNWY1O1xuXHRcdFx0Y3Vyc29yOiBwb2ludGVyO1xuXHRcdH1cblx0fVxufVxuIl0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9*/

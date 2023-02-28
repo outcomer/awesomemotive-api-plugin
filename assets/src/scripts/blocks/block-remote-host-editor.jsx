@@ -1,19 +1,22 @@
 ;(function (wp) {
 	const { registerBlockType } = wp.blocks
-	const { Component, Fragment, useState, useEffect, useRef } = wp.element
-	const { serverSideRender: ServerSideRender, apiFetch } = wp
+	const { Fragment, useState, useEffect } = wp.element
+	const { apiFetch } = wp
 	const { BlockControls, BlockIcon } = wp.blockEditor
+	const { __ } = wp.i18n
 	const {
+		Flex,
+		FlexItem,
+		Placeholder,
 		ToolbarGroup,
 		ToolbarButton,
-		Placeholder,
 		Spinner,
-		Flex,
-		FlexBlock,
-		FlexItem,
+		__experimentalSpacer: Spacer,
 		__experimentalInputControl: InputControl,
+		__experimentalHeading: Heading,
 	} = wp.components
-	const { __ } = wp.i18n
+
+	/* eslint-disable max-len */
 	const exampleImageData = (
 		<svg viewBox="0 0 274 165" xmlns="http://www.w3.org/2000/svg">
 			<path
@@ -34,12 +37,84 @@
 			</g>
 		</svg>
 	)
+	/* eslint-disable max-len */
+
+	let fetchController
+	let fetchError
 	let remoteContent = []
 
 	function BlockHandler(props) {
 		const { attributes, setAttributes, className, name } = props
 		const [editMode, setEditMode] = useState(true)
 		const [termsFetched, setTermsFetched] = useState()
+
+		const resetState = () => {
+			setEditMode(true)
+			setTermsFetched(null)
+		}
+
+		const notice = () => {
+			if (fetchError) {
+				return (
+					<p>
+						{__(
+							'Can not render block. Browser console provided with more details.',
+							'david-ev-asm-api-plugin'
+						)}
+					</p>
+				)
+			}
+		}
+
+		const jsonToTable = (title, theadData, tbodyData) => {
+			const mapping = {
+				ID: 'id',
+				'First Name': 'fname',
+				'Last Name': 'lname',
+				Email: 'email',
+				Date: 'date',
+			}
+
+			return (
+				<Fragment>
+					<Heading level="4">{title}</Heading>
+					<Spacer
+						marginTop={1}
+						style={{
+							width: '100%',
+						}}
+					/>
+					<table>
+						<thead>
+							<tr>
+								{theadData.map((heading) => {
+									return <th key={heading}>{heading}</th>
+								})}
+							</tr>
+						</thead>
+						<tbody>
+							{tbodyData.map((row, index) => {
+								return (
+									<tr key={index}>
+										{theadData.map((key) => {
+											let value
+											if ('Date' === key) {
+												value = new Date(
+													row[mapping[key]] * 1000
+												).toLocaleDateString('en-US')
+											} else {
+												value = row[mapping[key]]
+											}
+											return <td key={row[mapping[key]]}>{value}</td>
+										})}
+									</tr>
+								)
+							})}
+						</tbody>
+					</table>
+				</Fragment>
+			)
+		}
 
 		const getExample = () => {
 			return exampleImageData
@@ -57,6 +132,9 @@
 							}
 							icon={editMode ? 'visibility' : 'edit'}
 							onClick={() => {
+								if (!editMode) {
+									fetchController?.abort()
+								}
 								setTermsFetched(!editMode)
 								setEditMode(!editMode)
 							}}
@@ -93,17 +171,40 @@
 							}}
 						/>
 					</div>
+					<Spacer
+						marginTop={1}
+						style={{
+							width: '100%',
+						}}
+					/>
+					<div className="editor-errors">{notice()}</div>
 				</Placeholder>
 			)
 		}
 
 		const getBlockPreview = () => {
 			if (termsFetched) {
-				return (
-					<div className="preview-inner" key="block-preview">
-						{remoteContent}
-					</div>
-				)
+				try {
+					const content = jsonToTable(
+						remoteContent.title,
+						remoteContent.data.headers,
+						Object.values(remoteContent.data.rows)
+					)
+
+					return (
+						<div
+							className={`preview-inner ${window.DavidEvAsmApiPlugin.constants.cssNamespaces.front}`}
+							key="block-preview"
+						>
+							{content}
+						</div>
+					)
+				} catch (error) {
+					window.DavidEvAsmApiPlugin.logger.error(error)
+					fetchError = true
+
+					resetState()
+				}
 			}
 
 			return (
@@ -123,51 +224,42 @@
 			)
 		}
 
-		const getRemote = async () => {
-			return await apiFetch({
-				path: 'david-ev-asm/v1/block-remote-host',
-				method: 'POST',
-				data: { currentAttrs: attributes },
-			})
-				.then((response) => {
-					if (false === response.content) {
-						wp.data.dispatch('core/notices').createNotice(
-							'error', // Can be one of: success, info, warning, error.
-							__(
-								'Error on fetching data from remote server for the block, try again.',
-								'david-ev-asm-api-plugin'
-							),
-							{
-								isDismissible: true,
-							}
-						)
-					}
-
-					return response
-				})
-				.catch((e) => {
-					wp.data.dispatch('core/notices').createNotice(
-						'error', // Can be one of: success, info, warning, error.
-						__(
-							'Error on receiving data from the server for the block, trye again.',
-							'david-ev-asm-api-plugin'
-						),
-						{
-							isDismissible: true,
-						}
-					)
-				})
-		}
-
-		useEffect(() => {
+		useEffect(async () => {
 			let isMounted = true
 			if (!termsFetched && !editMode && !attributes.isExample) {
-				getRemote().then((response) => {
+				try {
 					if (isMounted) {
-						remoteContent = response.content
-						setTermsFetched(true)
+						fetchController =
+							typeof AbortController === 'undefined'
+								? undefined
+								: new AbortController()
+						const response = await apiFetch({
+							path: name.split('/').join('/v1/'),
+							method: 'GET',
+							signal: fetchController?.signal,
+						})
+
+						if (200 === response.code) {
+							remoteContent = response.content
+							setTermsFetched(true)
+							fetchError = false
+							return
+						}
+
+						throw new Error(response.content)
 					}
-				})
+				} catch (error) {
+					if ('AbortError' === error.name) {
+						window.DavidEvAsmApiPlugin.logger.warn(
+							__('Request aborted by user', 'david-ev-asm-api-plugin')
+						)
+						fetchError = false
+					} else {
+						window.DavidEvAsmApiPlugin.logger.error(error)
+						fetchError = true
+					}
+					resetState()
+				}
 			}
 			return () => {
 				isMounted = false
@@ -195,14 +287,17 @@
 	}
 
 	registerBlockType('david-ev-asm/block-remote-host', {
-		title: __('Remote host fetcher', 'david-ev-asm-api-plugin'),
+		title: __(
+			'Remote host fetcher (click preview button)',
+			'david-ev-asm-api-plugin'
+		),
 		description: __(
 			'Interacts with 3rd party host via WP block.',
 			'david-ev-asm-api-plugin'
 		),
 		icon,
 		category: 'david-ev-asm-plugin-blocks',
-		keywords: ['object'],
+		keywords: ['ASM'],
 		styles: [],
 		variations: [],
 		attributes: {

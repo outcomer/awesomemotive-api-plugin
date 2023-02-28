@@ -1,9 +1,37 @@
 // General rules
 @import "./init";
+@import "./_components/loader";
 
-/* stylelint-disable block-no-empty */
-.#{$namespace-admin} {
+.#{$namespace-front} {
+	[data-name*="david-ev-asm/"] {
+		.error-wrapper {
+			display: flex;
+			justify-content: center;
 
+			.error {
+				width: 70px;
+				position: relative;
+				height: 70px;
+				background: #900;
+				border-radius: 50%;
+				border: 4px solid white;
+
+				&:after,
+				&:before {
+					position: absolute;
+					content: "";
+					width: 10%;
+					left: 45%;
+					top: 10%;
+					height: 80%;
+					background-color: white;
+					transform: rotate(-45deg);
+				}
+
+				&:before {
+					transform: rotate(45deg);
+				}
+			}
+		}
+	}
 }
-
-/* stylelint-enable block-no-empty */

@@ -22,7 +22,7 @@ const loggerFn = (() => {
 			],
 			logPrefix = ['%cdavid-ev-asm-logger', styles.join(';')]
 
-		if (DavidEvAsmApiPlugin.constants.scriptDebug === false) {
+		if (window.DavidEvAsmApiPlugin.constants.scriptDebug === false) {
 			return
 		}
 
@@ -45,9 +45,9 @@ const loggerFn = (() => {
 	return api
 })()
 
-global.DavidEvAsmApiPlugin = global.DavidEvAsmApiPlugin || {}
+window.DavidEvAsmApiPlugin = window.DavidEvAsmApiPlugin || {}
 
-global.DavidEvAsmApiPlugin = {
-	...global.DavidEvAsmApiPlugin,
+window.DavidEvAsmApiPlugin = {
+	...window.DavidEvAsmApiPlugin,
 	...{ logger: loggerFn },
 }
