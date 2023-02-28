@@ -33,7 +33,7 @@ interface David_Ev_Asm_Org_Cache_Interface {
 	 *
 	 * @return mixed
 	 */
-	public function get_persons(): mixed;
+	public function persons_get(): mixed;
 
 	/**
 	 * Cache setter.
@@ -42,5 +42,12 @@ interface David_Ev_Asm_Org_Cache_Interface {
 	 *
 	 * @return void
 	 */
-	public function put_persons( string $value ): void;
+	public function persons_put( string $value ): void;
+
+	/**
+	 * Cache cleaner.
+	 *
+	 * @return void
+	 */
+	public function persons_delete(): void;
 }

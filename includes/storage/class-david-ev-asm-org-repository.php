@@ -45,7 +45,7 @@ class David_Ev_Asm_Org_Repository {
 	 *
 	 * @return object
 	 */
-	public function get_persons(): object {
+	public function persons_get(): object {
 		return $this->data_provider->fetch_persons();
 	}
 }

@@ -64,7 +64,7 @@ class David_Ev_Asm_Org_Db_Cache implements Cache_Interface {
 	 *
 	 * @return mixed
 	 */
-	public function get_persons(): mixed {
+	public function persons_get(): mixed {
 		return get_transient( self::CACHE_KEY_PERSONS );
 	}
 
@@ -75,7 +75,16 @@ class David_Ev_Asm_Org_Db_Cache implements Cache_Interface {
 	 *
 	 * @return void
 	 */
-	public function put_persons( string $value ): void {
+	public function persons_put( string $value ): void {
 		set_transient( self::CACHE_KEY_PERSONS, $value, self::TTL_PERSONS );
+	}
+
+	/**
+	 * Cache cleaner.
+	 *
+	 * @return void
+	 */
+	public function persons_delete(): void {
+		delete_transient( self::CACHE_KEY_PERSONS );
 	}
 }

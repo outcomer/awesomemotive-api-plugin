@@ -15,6 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use DavidEv\Asm\ApiPlugin\Includes\David_Ev_Asm_Modules;
 
+use WP_CLI;
+
 require_once dirname( __FILE__ ) . '/class-david-ev-asm-modules.php';
 
 /**
@@ -118,6 +120,11 @@ final class David_Ev_Asm_Core extends David_Ev_Asm_Modules {
 		$this->set_module_assets();
 		$this->set_module_blocks();
 		$this->set_module_setup();
+
+		if ( defined( 'WP_CLI' ) && WP_CLI ) {
+			require_once DAVID_E_ASM_CORE_ABSPATH . '/class-david-ev-asm-cli.php';
+			WP_CLI::add_command( 'david_ev_asm_org_cache', new \DavidEv\Asm\ApiPlugin\Includes\David_Ev_Asm_Cli() );
+		}
 
 		/**
 		 * Fire once core instantiated.

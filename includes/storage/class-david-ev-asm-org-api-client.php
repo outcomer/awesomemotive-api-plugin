@@ -59,7 +59,7 @@ class David_Ev_Asm_Org_Api_Client implements Data_Provider_Interface {
 	 */
 	public function fetch_persons(): object {
 
-		$cache = $this->cache_provider->get_persons();
+		$cache = $this->cache_provider->persons_get();
 
 		if ( false !== $cache ) {
 			return json_decode( $cache );
@@ -74,7 +74,7 @@ class David_Ev_Asm_Org_Api_Client implements Data_Provider_Interface {
 			if ( 200 === $status ) {
 				$body = wp_remote_retrieve_body( $response );
 				if ( $this->is_json( $body ) ) {
-					$this->cache_provider->put_persons( $body );
+					$this->cache_provider->persons_put( $body );
 					return json_decode( $body );
 				}
 			}

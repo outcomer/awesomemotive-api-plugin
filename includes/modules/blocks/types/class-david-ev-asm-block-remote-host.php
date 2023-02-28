@@ -173,7 +173,7 @@ class David_Ev_Asm_Block_Remote_Host extends David_Ev_Asm_Block_Abstract {
 	private function respond_content_request(): array {
 		try {
 			$code        = 200;
-			$remote_data = $this->repository->get_persons();
+			$remote_data = $this->repository->persons_get();
 		} catch ( Throwable $e ) {
 			$code        = 400;
 			$remote_data = $e->getMessage();
