@@ -118,6 +118,7 @@ final class David_Ev_Asm_Core extends David_Ev_Asm_Modules {
 		$this->set_module_assets();
 		$this->set_module_blocks();
 		$this->set_module_setup();
+		$this->set_module_admin();
 		$this->set_module_org_commands();
 
 		/**

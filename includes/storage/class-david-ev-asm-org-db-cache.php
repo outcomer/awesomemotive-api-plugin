@@ -62,10 +62,11 @@ class David_Ev_Asm_Org_Db_Cache implements Cache_Interface {
 	/**
 	 * Cache getter.
 	 *
-	 * @return mixed
+	 * @return object|bool
 	 */
 	public function persons_get(): mixed {
-		return get_transient( self::CACHE_KEY_PERSONS );
+		$cached = get_transient( self::CACHE_KEY_PERSONS );
+		return ( false === $cached ) ? $cached : json_decode( $cached );
 	}
 
 	/**
@@ -86,5 +87,15 @@ class David_Ev_Asm_Org_Db_Cache implements Cache_Interface {
 	 */
 	public function persons_delete(): void {
 		delete_transient( self::CACHE_KEY_PERSONS );
+	}
+
+	/**
+	 * Cache cleaner.
+	 *
+	 * @return integer|bool
+	 */
+	public function persons_get_expiration(): mixed {
+		$cache = $this->persons_get();
+		return $cache || (int) get_option( '_transient_timeout_' . self::CACHE_KEY_PERSONS );
 	}
 }

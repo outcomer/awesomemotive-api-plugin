@@ -18,11 +18,12 @@ use DavidEv\Asm\ApiPlugin\Includes\{
 	David_Ev_Asm_Requirements,
 };
 
-use DavidEv\Asm\ApiPlugin\Includes\Modules\Blocks\David_Ev_Asm_Block_Factory;
-use DavidEv\Asm\ApiPlugin\Includes\Modules\Command\David_Ev_Asm_Org_Commands;
-use DavidEv\Asm\ApiPlugin\Includes\Modules\Config\{
-	David_Ev_Asm_Setup,
-	David_Ev_Asm_Assets,
+use DavidEv\Asm\ApiPlugin\Includes\Modules\{
+	Blocks\David_Ev_Asm_Block_Factory,
+	Command\David_Ev_Asm_Org_Commands,
+	Config\David_Ev_Asm_Setup,
+	Config\David_Ev_Asm_Assets,
+	Admin\David_Ev_Asm_Menu,
 };
 
 /**
@@ -66,6 +67,13 @@ abstract class David_Ev_Asm_Modules {
 	 * @var David_Ev_Asm_Setup
 	 */
 	private David_Ev_Asm_Setup $setup;
+
+	/**
+	 * Class instance.
+	 *
+	 * @var David_Ev_Asm_Menu
+	 */
+	private David_Ev_Asm_Menu $admin;
 
 	/**
 	 * Class instance.
@@ -170,6 +178,24 @@ abstract class David_Ev_Asm_Modules {
 	 */
 	public function get_module_setup(): David_Ev_Asm_Setup {
 		return $this->setup;
+	}
+
+	/**
+	 * Module setter.
+	 *
+	 * @return void
+	 */
+	protected function set_module_admin(): void {
+		$this->admin = David_Ev_Asm_Menu::instance();
+	}
+
+	/**
+	 * Module getter.
+	 *
+	 * @return David_Ev_Asm_Menu
+	 */
+	public function get_module_admin(): David_Ev_Asm_Menu {
+		return $this->admin;
 	}
 
 	/**

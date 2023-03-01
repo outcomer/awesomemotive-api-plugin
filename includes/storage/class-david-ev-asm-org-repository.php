@@ -10,6 +10,7 @@ declare(strict_types = 1);
 namespace DavidEv\Asm\ApiPlugin\Includes\Storage;
 
 use DavidEv\Asm\ApiPlugin\Includes\Storage\Interfaces\David_Ev_Asm_Org_Data_Provider_Interface as Data_Provider_Interface;
+use DavidEv\Asm\ApiPlugin\Includes\Storage\Interfaces\David_Ev_Asm_Org_Repository_Interface as Repository_Interface;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -20,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @package DavidEvAsmApiPlugin
  */
-class David_Ev_Asm_Org_Repository {
+class David_Ev_Asm_Org_Repository implements Repository_Interface {
 
 	/**
 	 * Transport.
@@ -39,9 +40,7 @@ class David_Ev_Asm_Org_Repository {
 	}
 
 	/**
-	 * API endpoint fetcher.
-	 *
-	 * @throws Exception On any unexpected response.
+	 * Persons getter.
 	 *
 	 * @return object
 	 */

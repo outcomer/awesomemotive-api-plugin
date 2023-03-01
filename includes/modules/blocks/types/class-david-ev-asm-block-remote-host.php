@@ -33,7 +33,7 @@ class David_Ev_Asm_Block_Remote_Host extends David_Ev_Asm_Block_Abstract {
 	/**
 	 * Data provider.
 	 *
-	 * @var David_Ev_Asm_Org_Repository
+	 * @var Repository
 	 */
 	private Repository $repository;
 
@@ -175,8 +175,13 @@ class David_Ev_Asm_Block_Remote_Host extends David_Ev_Asm_Block_Abstract {
 			$code        = 200;
 			$remote_data = $this->repository->persons_get();
 		} catch ( Throwable $e ) {
+			$msg = [
+				$e->getMessage(),
+				$e->getFile() . ':' . $e->getLine(),
+			];
+
 			$code        = 400;
-			$remote_data = $e->getMessage();
+			$remote_data = implode( ', ', $msg );
 		}
 
 		return [

@@ -67,14 +67,6 @@
 		}
 
 		const jsonToTable = (title, theadData, tbodyData) => {
-			const mapping = {
-				ID: 'id',
-				'First Name': 'fname',
-				'Last Name': 'lname',
-				Email: 'email',
-				Date: 'date',
-			}
-
 			return (
 				<Fragment>
 					<Heading level="4">{title}</Heading>
@@ -96,16 +88,16 @@
 							{tbodyData.map((row, index) => {
 								return (
 									<tr key={index}>
-										{theadData.map((key) => {
+										{Object.entries(row).map((rowData) => {
 											let value
-											if ('Date' === key) {
-												value = new Date(
-													row[mapping[key]] * 1000
-												).toLocaleDateString('en-US')
+											if ('date' === rowData[0]) {
+												value = new Date(rowData[1] * 1000).toLocaleDateString(
+													navigator.language
+												)
 											} else {
-												value = row[mapping[key]]
+												value = rowData[1]
 											}
-											return <td key={row[mapping[key]]}>{value}</td>
+											return <td key={rowData[1]}>{value}</td>
 										})}
 									</tr>
 								)

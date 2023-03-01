@@ -30,7 +30,7 @@ final class David_Ev_Asm_Org_Commands extends David_Ev_Asm_Abstract_Commands {
 	 * @var array
 	 */
 	private $commands = [
-		'org_cache_persons',
+		'org_cache persons',
 	];
 
 	/**
@@ -78,7 +78,7 @@ final class David_Ev_Asm_Org_Commands extends David_Ev_Asm_Abstract_Commands {
 	 *
 	 * ## USAGE
 	 *
-	 *     wp david-ev-asm org_cache_persons delete
+	 *     wp david-ev-asm:org_cache persons delete
 	 *
 	 * @param array $args       Array of arguments.
 	 * @param array $assoc_args Array of options.
@@ -87,8 +87,8 @@ final class David_Ev_Asm_Org_Commands extends David_Ev_Asm_Abstract_Commands {
 	 *
 	 * @return void
 	 */
-	public function org_cache_persons( array $args, array $assoc_args ): void {
+	public function persons( array $args, array $assoc_args ): void {
 		David_Ev_Asm_Org_Db_Cache::instance()->persons_delete();
-		WP_CLI::success( 'Done!' );
+		WP_CLI::success( __( 'Cache of persons deleted.', 'david-ev-asm-api-plugin' ) );
 	}
 }

@@ -35,6 +35,6 @@ abstract class David_Ev_Asm_Abstract_Commands {
 		if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {
 			return;
 		}
-		WP_CLI::add_command( self::COMMAND_NAMESPACE . " {$name}", $this );
+		WP_CLI::add_command( self::COMMAND_NAMESPACE . ":{$name}", $this );
 	}
 }

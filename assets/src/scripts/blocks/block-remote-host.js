@@ -32,7 +32,7 @@
 					const body = await response.json()
 
 					if (200 !== body.data.code) {
-						throw new Error(body.data)
+						throw new Error(body.data.content)
 					}
 					remoteContent = body.data.content
 					return

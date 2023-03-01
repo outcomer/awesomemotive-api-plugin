@@ -4,10 +4,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: david_ev_asm_api_plugin 1.0\n"
-"POT-Creation-Date: 2023-02-24 14:05+0100\n"
+"POT-Creation-Date: 2023-03-01 14:32+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <team@email.org>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,10 +15,11 @@ msgstr ""
 "X-Generator: Poedit 3.1.1\n"
 "X-Domain: david-ev-asm-api-plugin\n"
 "X-Poedit-Basepath: ../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: assets/src\n"
-"X-Poedit-SearchPathExcluded-1: node_modules\n"
-"X-Poedit-SearchPathExcluded-2: vendor\n"
+"X-Poedit-SearchPathExcluded-0: node_modules\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+"X-Poedit-SearchPathExcluded-2: assets\n"
 
 #: includes/class-david-ev-asm-requirements.php:114
 #: includes/class-david-ev-asm-requirements.php:126
@@ -54,4 +55,12 @@ msgstr ""
 #: includes/class-david-ev-asm-requirements.php:254
 #, php-format
 msgid "%1$s requirements violation:"
+msgstr ""
+
+#: includes/modules/blocks/class-david-ev-asm-block-factory.php:92
+msgid "David Ev ASM Plugin blocks"
+msgstr ""
+
+#: includes/modules/command/class-david-ev-asm-org-commands.php:92
+msgid "Cache of persons deleted."
 msgstr ""

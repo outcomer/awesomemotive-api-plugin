@@ -61,7 +61,6 @@ class David_Ev_Asm_Setup {
 		add_filter( 'admin_body_class', [ $this, 'admin_body_classes' ], 20 );
 	}
 
-
 	/**
 	 * Add custom classes into body tag for any front page.
 	 *

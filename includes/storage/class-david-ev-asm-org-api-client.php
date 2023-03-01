@@ -62,7 +62,7 @@ class David_Ev_Asm_Org_Api_Client implements Data_Provider_Interface {
 		$cache = $this->cache_provider->persons_get();
 
 		if ( false !== $cache ) {
-			return json_decode( $cache );
+			return $cache;
 		}
 
 		$endpoint = "{$this->host}/challenge/1/";
