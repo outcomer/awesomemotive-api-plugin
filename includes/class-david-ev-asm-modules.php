@@ -19,6 +19,7 @@ use DavidEv\Asm\ApiPlugin\Includes\{
 };
 
 use DavidEv\Asm\ApiPlugin\Includes\Modules\Blocks\David_Ev_Asm_Block_Factory;
+use DavidEv\Asm\ApiPlugin\Includes\Modules\Command\David_Ev_Asm_Org_Commands;
 use DavidEv\Asm\ApiPlugin\Includes\Modules\Config\{
 	David_Ev_Asm_Setup,
 	David_Ev_Asm_Assets,
@@ -32,14 +33,14 @@ use DavidEv\Asm\ApiPlugin\Includes\Modules\Config\{
 abstract class David_Ev_Asm_Modules {
 
 	/**
-	 * The single instance of the class.
+	 * Class instance.
 	 *
 	 * @var David_Ev_Asm_Requirements
 	 */
 	private David_Ev_Asm_Requirements $requirements;
 
 	/**
-	 * The single instance of the class.
+	 * Class instance.
 	 *
 	 * @var David_Ev_Asm_Autoloader
 	 */
@@ -53,18 +54,25 @@ abstract class David_Ev_Asm_Modules {
 	private string $assets;
 
 	/**
-	 * The single instance of the class.
+	 * Class instance.
 	 *
 	 * @var David_Ev_Asm_Block_Factory
 	 */
 	private David_Ev_Asm_Block_Factory $blocks;
 
 	/**
-	 * The single instance of the class.
+	 * Class instance.
 	 *
 	 * @var David_Ev_Asm_Setup
 	 */
 	private David_Ev_Asm_Setup $setup;
+
+	/**
+	 * Class instance.
+	 *
+	 * @var David_Ev_Asm_Org_Commands
+	 */
+	private David_Ev_Asm_Org_Commands $org_commands;
 
 	/**
 	 * Module setter.
@@ -162,5 +170,23 @@ abstract class David_Ev_Asm_Modules {
 	 */
 	public function get_module_setup(): David_Ev_Asm_Setup {
 		return $this->setup;
+	}
+
+	/**
+	 * Module setter.
+	 *
+	 * @return void
+	 */
+	protected function set_module_org_commands(): void {
+		$this->org_commands = David_Ev_Asm_Org_Commands::instance();
+	}
+
+	/**
+	 * Module getter.
+	 *
+	 * @return David_Ev_Asm_Cli
+	 */
+	public function get_module_org_commands(): David_Ev_Asm_Org_Commands {
+		return $this->org_commands;
 	}
 }
