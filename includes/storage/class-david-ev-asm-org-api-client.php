@@ -53,11 +53,17 @@ class David_Ev_Asm_Org_Api_Client implements Data_Provider_Interface {
 	/**
 	 * API endpoint fetcher.
 	 *
+	 * @param bool $no_cache Whether to update the cache.
+	 *
 	 * @throws Exception On any unexpected response.
 	 *
 	 * @return object
 	 */
-	public function fetch_persons(): object {
+	public function fetch_persons( bool $no_cache = false ): object {
+
+		if ( $no_cache ) {
+			$this->cache_provider->persons_delete();
+		}
 
 		$cache = $this->cache_provider->persons_get();
 

@@ -23,9 +23,11 @@ interface David_Ev_Asm_Org_Data_Provider_Interface {
 	/**
 	 * API endpoint fetcher.
 	 *
+	 * @param bool $no_cache Whether to update the cache.
+	 *
 	 * @throws Exception On any unexpected response.
 	 *
 	 * @return object
 	 */
-	public function fetch_persons(): object;
+	public function fetch_persons( bool $no_cache = false ): object;
 }

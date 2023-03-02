@@ -9,7 +9,7 @@ declare(strict_types = 1);
 
 namespace DavidEv\Asm\ApiPlugin\Includes\Modules\Admin;
 
-use DavidEv\Asm\ApiPlugin\Includes\Modules\Admin\David_Ev_Asm_Menu_Cache;
+use DavidEv\Asm\ApiPlugin\Includes\Modules\Admin\David_Ev_Asm_Menu_Persons;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -69,6 +69,6 @@ class David_Ev_Asm_Menu {
 	 * @return void
 	 */
 	public function add_admin_options_page(): void {
-		new David_Ev_Asm_Menu_Cache();
+		new David_Ev_Asm_Menu_Persons();
 	}
 }

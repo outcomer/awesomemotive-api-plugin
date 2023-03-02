@@ -15,9 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use DavidEv\Asm\ApiPlugin\Includes\{
 	Modules\Blocks\David_Ev_Asm_Block_Abstract,
-	Storage\David_Ev_Asm_Org_Repository as Repository,
-	Storage\David_Ev_Asm_Org_Api_Client as Api_Client,
-	Storage\David_Ev_Asm_Org_Db_Cache as Cache_Provider,
+	Storage\David_Ev_Asm_Org_Repository as Org_Repository,
 };
 use ReflectionClass;
 use WP_REST_Request;
@@ -33,9 +31,9 @@ class David_Ev_Asm_Block_Remote_Host extends David_Ev_Asm_Block_Abstract {
 	/**
 	 * Data provider.
 	 *
-	 * @var Repository
+	 * @var Org_Repository
 	 */
-	private Repository $repository;
+	private Org_Repository $org_repository;
 
 	/**
 	 * David_Ev_Asm_Block_Remote_Host Constructor
@@ -46,9 +44,6 @@ class David_Ev_Asm_Block_Remote_Host extends David_Ev_Asm_Block_Abstract {
 
 		$prefix = DAVID_E_ASM_ASSET_NAME_PREFIX;
 		$class  = new ReflectionClass( $this );
-
-		$cache_provider = new Cache_Provider();
-		$api_client     = new Api_Client( $cache_provider );
 
 		$this->block_assets = [
 			'editor_script' => [
@@ -69,7 +64,7 @@ class David_Ev_Asm_Block_Remote_Host extends David_Ev_Asm_Block_Abstract {
 			],
 		];
 
-		$this->repository = new Repository( $api_client );
+		$this->org_repository = new Org_Repository();
 
 		$this
 			->set_block_name_from_class( $class->getShortName() )
@@ -173,7 +168,7 @@ class David_Ev_Asm_Block_Remote_Host extends David_Ev_Asm_Block_Abstract {
 	private function respond_content_request(): array {
 		try {
 			$code        = 200;
-			$remote_data = $this->repository->persons_get();
+			$remote_data = $this->org_repository->persons_get();
 		} catch ( Throwable $e ) {
 			$msg = [
 				$e->getMessage(),

@@ -119,5 +119,9 @@
 		fillContainers(html)
 	}
 
-	BlockInit.call(BlockInit)
+	document.addEventListener(
+		'DOMContentLoaded',
+		() => BlockInit.call(BlockInit),
+		false
+	)
 })()
