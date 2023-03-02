@@ -51,27 +51,9 @@ class David_Ev_Asm_Menu_Persons {
 	 * David_Ev_Asm_Menu_Item Constructor.
 	 */
 	public function __construct() {
-		$this->init_data();
 		$this->add_admin_options_page();
+		$this->init_data();
 		$this->bootstrap_page_load();
-	}
-
-	/**
-	 * Instantiate $this->persons with data.
-	 *
-	 * @return void
-	 */
-	private function init_data(): void {
-		$prefix = DAVID_E_ASM_ASSET_NAME_PREFIX;
-		$update = $_POST[ "{$prefix}cache-update" ] ?? false;
-
-		$args = [ 'no-cache' => false ];
-
-		if ( 'Update' === $update ) {
-			$args['no-cache'] = true;
-		}
-
-		$this->persons = ( new Org_Repository() )->persons_get( $args );
 	}
 
 	/**
@@ -98,6 +80,25 @@ class David_Ev_Asm_Menu_Persons {
 		 * @hook david_ev_asm_api_plugin__admin_menu_created
 		 */
 		do_action( 'david_ev_asm_api_plugin__admin_menu_created', $this->menu_page_hook );
+	}
+
+	/**
+	 * Instantiate $this->persons with data.
+	 *
+	 * @return void
+	 */
+	private function init_data(): void {
+		$prefix = DAVID_E_ASM_ASSET_NAME_PREFIX;
+		$update = $_POST[ "{$prefix}cache-update" ] ?? false;
+
+		$args = [ 'no-cache' => false ];
+
+		if ( 'Update' === $update ) {
+			check_admin_referer( "bulk-{$this->menu_page_hook}", '_wpnonce' );
+			$args['no-cache'] = true;
+		}
+
+		$this->persons = ( new Org_Repository() )->persons_get( $args );
 	}
 
 	/**

@@ -104,9 +104,9 @@ class David_Ev_Asm_View_Persons extends WP_List_Table {
 		?>
 		<div class="wrap">
 			<form method="post">
-				<?php submit_button( __( 'Update', 'david-ev-asm-api-plugin' ), "primary {$prefix}cache-update", "{$prefix}cache-update", false, [ 'value' => 1 ] ); ?>
+				<?php submit_button( __( 'Update', 'david-ev-asm-api-plugin' ), "primary {$prefix}cache-update", "{$prefix}cache-update", false ); ?>
 				<?php $this->display(); ?>
-				<?php submit_button( __( 'Update', 'david-ev-asm-api-plugin' ), "primary {$prefix}cache-update", "{$prefix}cache-update", false, [ 'value' => 1 ] ); ?>
+				<?php submit_button( __( 'Update', 'david-ev-asm-api-plugin' ), "primary {$prefix}cache-update", "{$prefix}cache-update", false ); ?>
 			</form>
 		</div>
 		<?php
