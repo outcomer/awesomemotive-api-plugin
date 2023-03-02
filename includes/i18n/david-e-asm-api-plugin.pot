@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: david_ev_asm_api_plugin 1.0\n"
-"POT-Creation-Date: 2023-03-01 14:32+0100\n"
+"POT-Creation-Date: 2023-03-02 19:24+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _x:1,2c;_nx:4c,1,2;__;_e;esc_html__;esc_html_e;esc_attr_e;_n:1,2\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Domain: david-ev-asm-api-plugin\n"
 "X-Poedit-Basepath: ../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -55,6 +55,34 @@ msgstr ""
 #: includes/class-david-ev-asm-requirements.php:254
 #, php-format
 msgid "%1$s requirements violation:"
+msgstr ""
+
+#: includes/modules/admin/class-david-ev-asm-menu-persons.php:67
+#: includes/modules/admin/class-david-ev-asm-menu-persons.php:68
+msgid "David Ev ASM"
+msgstr ""
+
+#: includes/modules/admin/class-david-ev-asm-menu-persons.php:127
+msgid "Number of items per page"
+msgstr ""
+
+#: includes/modules/admin/view/class-david-ev-asm-view-persons.php:81
+msgid "The cache of Persons in organization."
+msgstr ""
+
+#: includes/modules/admin/view/class-david-ev-asm-view-persons.php:87
+#, php-format
+msgid "The content of the cache is updated once per %1$s hour(s). You may force update from the page."
+msgstr ""
+
+#: includes/modules/admin/view/class-david-ev-asm-view-persons.php:107
+#: includes/modules/admin/view/class-david-ev-asm-view-persons.php:109
+msgid "Update"
+msgstr ""
+
+#: includes/modules/admin/view/class-david-ev-asm-view-persons.php:126
+#, php-format
+msgid "Error render data:  %1$s, %2$s:%3$s."
 msgstr ""
 
 #: includes/modules/blocks/class-david-ev-asm-block-factory.php:92
