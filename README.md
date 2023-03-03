@@ -3,18 +3,20 @@ This project is WordPress plugin. So it requires to be installed into WordPress 
 Once done plugin will add one custom block in Gutenberg editor that provide preview mode in admin and can be viewed in frontend (just put block onto page, save it and switch to page frontend view mode).
 Beside this plugin add admin menu item with block source content and an option to update it.
 
-Internaly plugin code uses `npm` and `composer` bundles. This package contains them all installed and compiled.
+Internaly plugin code uses `npm` and `composer` bundles needed at development stage only. If for some reasons you need it then:
 But if you want to do it yourself run from plugin root folder:
-- `composer install`
-- `npm i`
-- `npm run prod`
+- `composer install` - will add all what needed to make PHP CS linting;
+- `npm i` - will add all what needed to make scripts and styles linting, compiling source assests;
+- `npm run prod` - start compilation;
 
 Last command will compile all plugin assests into 2 variations: normal file and minified file (*.min.js, *.min.css)
 Which one (min/non min) version will be used by plugin depends on value of global WP constant `SCRIPT_DEBUG`. Adding this constant inside `wp-config.php` with value `true` will force plugin to use non minified assets and vise versa.
 
 ## Requirements
 WordPress >= 6.1
+
 PHP >= 8.1
+
 MariaDB >= 10.5.0 OR MySQL >= 8.0.0
 
 ## Comments on Gutenberg block implementation
