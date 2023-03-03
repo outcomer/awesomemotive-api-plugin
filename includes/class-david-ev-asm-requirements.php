@@ -110,8 +110,8 @@ class David_Ev_Asm_Requirements {
 
 			if ( version_compare( $matches[1], self::MARIA_DB_REQUIRED, '<' ) ) {
 				$this->errors['fatal'][] = sprintf(
-					// translators: %1$s - plugin name, %2$s - MySQL version.
-					__( '%1$s requires at least MariaDB %12$s and above or MySQL %3$s and above, you have MariaDB %4$s', 'david-ev-asm-api-plugin' ),
+					// translators: %1$s - plugin name, %2$s - MariaDB version, %3$s - MySQL version, %4$s - MariaDB version.
+					__( '%1$s requires at least MariaDB %2$s and above or MySQL %3$s and above, you have MariaDB %4$s', 'david-ev-asm-api-plugin' ),
 					$this->plugin->Name,
 					self::MARIA_DB_REQUIRED,
 					self::MYSQL_DB_REQUIRED,
@@ -122,8 +122,8 @@ class David_Ev_Asm_Requirements {
 
 			if ( version_compare( $db_version, MYSQL_DB_REQUIRED, '<' ) ) {
 				$this->errors['fatal'][] = sprintf(
-					// translators: %1$s - plugin name, %2$s - MySQL version.
-					__( '%1$s requires at least MariaDB %12$s and above or MySQL %3$s and above, you have MariaDB %4$s', 'david-ev-asm-api-plugin' ),
+					// translators: %1$s - plugin name, %2$s - MariaDB version, %3$s - MySQL version, %4$s - MySQL version.
+					__( '%1$s requires at least MariaDB %2$s and above or MySQL %3$s and above, you have MySQL %4$s', 'david-ev-asm-api-plugin' ),
 					$this->plugin->Name,
 					self::MARIA_DB_REQUIRED,
 					self::MYSQL_DB_REQUIRED,
@@ -134,7 +134,7 @@ class David_Ev_Asm_Requirements {
 
 		if ( version_compare( $php_version, $this->plugin->RequiresPHP, '<' ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 			$this->errors['fatal'][] = sprintf(
-				// translators: %1$s - plugin name, %2$s - PHP version.
+				// translators: %1$s - plugin name, %2$s - PHP version, %3$s - PHP version.
 				__( '%1$s requires at least PHP %2$s version or higher, you have PHP %3$s', 'david-ev-asm-api-plugin' ),
 				$this->plugin->Name,
 				$this->plugin->RequiresPHP,
@@ -144,20 +144,11 @@ class David_Ev_Asm_Requirements {
 
 		if ( version_compare( $wp_version, $this->plugin->RequiresWP, '<' ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 			$this->errors['fatal'][] = sprintf(
-				// translators: %1$s - plugin name, %2$s - PHP version.
+				// translators: %1$s - plugin name, %2$s - PHP version, %2$s - WordPress version.
 				__( '%1$s requires at least WordPress %2$s version or higher, you have WordPress %3$s', 'david-ev-asm-api-plugin' ),
 				$this->plugin->Name,
 				$this->plugin->RequiresWP,
 				$wp_version
-			);
-		}
-
-		if ( ! file_exists( DAVID_E_ASM_PLUGIN_DIR . '/vendor/autoload.php' ) ) {
-			$this->errors['fatal'][] = sprintf(
-				// translators: %1$s - file name, %2$s - console command name.
-				__( 'No %1$s file found in "vendor" folder. Did you run %2$s command?', 'david-ev-asm-api-plugin' ),
-				'<span style="background: #d7d7d7;border-radius: 3px;padding: 1px 5px;">autoload.php</span>',
-				'<span style="background: #d7d7d7;border-radius: 3px;padding: 1px 5px;">composer install</span>'
 			);
 		}
 	}

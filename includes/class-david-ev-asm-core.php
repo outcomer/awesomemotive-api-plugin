@@ -80,7 +80,7 @@ final class David_Ev_Asm_Core extends David_Ev_Asm_Modules {
 		// This can be moved into config logic.
 		define( 'DAVID_E_ASM_FILE_MIN_SUFFIX', $min );
 		define( 'DAVID_E_ASM_CODEPATH_PREFIX', 'includes' );
-		define( 'DAVID_E_ASM_CLASS_BASE_NAMESPACE', 'DavidEv\Asm\ApiPlugin' );
+		define( 'DAVID_E_ASM_CLASS_BASE_NAMESPACE', 'DavidEv\Asm\ApiPlugin\\' );
 		define( 'DAVID_E_ASM_CLASS_NAME_PREFIX', 'David_Ev_Asm_' );
 		define( 'DAVID_E_ASM_ASSET_NAME_PREFIX', str_replace( '_', '-', strtolower( DAVID_E_ASM_CLASS_NAME_PREFIX ) ) );
 		define( 'DAVID_E_ASM_CORE_ABSPATH', DAVID_E_ASM_PLUGIN_DIR . DAVID_E_ASM_CODEPATH_PREFIX ); // e.g.: /wp-content/plugins/plugin_folder/includes.

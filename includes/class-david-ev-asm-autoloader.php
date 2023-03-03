@@ -100,7 +100,7 @@ class David_Ev_Asm_Autoloader {
 
 		// Replace fragments A,B.. with real directory name in "A\B\C\...".
 		if ( 0 === strpos( $class, $this->namespace_base ) ) {
-			$class = str_replace( $this->namespace_base, (string) null, $class ); // parent keep code whereever inside it's root/includes.
+			$class = strtolower( str_replace( $this->namespace_base, (string) null, $class ) );
 		}
 
 		if ( false !== strpos( strtolower( $class ), strtolower( $this->class_name_prefix ) ) ) {
