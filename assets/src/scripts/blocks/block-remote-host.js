@@ -85,10 +85,16 @@
 			return table
 		}
 
-		const fillContainers = ($html) => {
+		const fillContainers = (blockHtml) => {
 			blockNodes.forEach((blockNode) => {
 				blockNode.innerHTML = null
-				blockNode.appendChild($html)
+				const atts = JSON.parse(blockNode.dataset.atts)
+				if ('undefined' !== typeof atts.blockTitle && '' !== atts.blockTitle) {
+					const H4 = document.createElement('H4')
+					H4.innerText = atts.blockTitle
+					blockNode.appendChild(H4)
+				}
+				blockNode.appendChild(blockHtml)
 			})
 		}
 
@@ -108,15 +114,15 @@
 
 		await init()
 
-		let html = getErrorMarkup()
+		let blockHtml = getErrorMarkup()
 
 		try {
-			html = jsonToTable()
+			blockHtml = jsonToTable()
 		} catch (error) {
 			global.DavidEvAsmApiPlugin.logger.error(error)
 		}
 
-		fillContainers(html)
+		fillContainers(blockHtml)
 	}
 
 	document.addEventListener(

@@ -153,7 +153,11 @@ class David_Ev_Asm_Block_Remote_Host extends David_Ev_Asm_Block_Abstract {
 	public function render( array $attributes, ?string $content = null ): ?string {
 		ob_start();
 		?>
-		<div class="david-ev-asm-block" data-name="<?php echo esc_html( $this->get_blockname_full() ); ?>">
+		<div
+			class="david-ev-asm-block"
+			data-name="<?php echo esc_html( $this->get_blockname_full() ); ?>"
+			data-atts="<?php echo esc_html( wp_json_encode( $attributes ) ); ?>"
+		>
 			<div class="block-loader"><div class="loading"><i></i><i></i><i></i><i></i></div></div>
 		</div>
 		<?php
