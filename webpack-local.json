@@ -1,8 +1,0 @@
-{
-	"browserSync": {
-		"localSiteDomain": "me-experimental-local.com",
-		"localSiteHost": "https://me-experimental-local.com",
-		"localSiteCertPathKey": "e:/OS543/userdata/config/cert_files/me-experimental-local.com.key",
-		"localSiteCertPathCrt": "e:/OS543/userdata/config/cert_files/me-experimental-local.com.crt"
-	}
-}
