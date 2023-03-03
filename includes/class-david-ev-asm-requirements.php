@@ -73,7 +73,7 @@ class David_Ev_Asm_Requirements {
 		$this->validate_environment();
 		$this->notify();
 
-		return false;
+		add_action( 'admin_init', array( $this, 'action_deactivate_plugins' ) );
 	}
 
 	/**
@@ -251,6 +251,17 @@ class David_Ev_Asm_Requirements {
 		</div>
 		<?php
 		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
+	}
+
+	/**
+	 * Deactivate plugin on requirements violation.
+	 *
+	 * @return void
+	 */
+	public function action_deactivate_plugins() {
+		if ( ! empty( $this->errors['fatal'] ) ) {
+			deactivate_plugins( basename( DAVID_E_ASM_PLUGIN_DIR) . '/' . basename(DAVID_E_ASM_API_PLUGIN_FILE) );
+		}
 	}
 
 	/**
