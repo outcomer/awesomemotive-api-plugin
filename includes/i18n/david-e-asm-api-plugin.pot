@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: david_ev_asm_api_plugin 1.0\n"
-"POT-Creation-Date: 2023-03-02 19:24+0100\n"
+"POT-Creation-Date: 2023-03-03 17:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -22,9 +22,13 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-2: assets\n"
 
 #: includes/class-david-ev-asm-requirements.php:114
+#, php-format
+msgid "%1$s requires at least MariaDB %2$s and above or MySQL %3$s and above, you have MariaDB %4$s"
+msgstr ""
+
 #: includes/class-david-ev-asm-requirements.php:126
 #, php-format
-msgid "%1$s requires at least MariaDB %12$s and above or MySQL %3$s and above, you have MariaDB %4$s"
+msgid "%1$s requires at least MariaDB %2$s and above or MySQL %3$s and above, you have MySQL %4$s"
 msgstr ""
 
 #: includes/class-david-ev-asm-requirements.php:138
@@ -37,22 +41,17 @@ msgstr ""
 msgid "%1$s requires at least WordPress %2$s version or higher, you have WordPress %3$s"
 msgstr ""
 
-#: includes/class-david-ev-asm-requirements.php:158
-#, php-format
-msgid "No %1$s file found in \"vendor\" folder. Did you run %2$s command?"
-msgstr ""
-
-#: includes/class-david-ev-asm-requirements.php:194
+#: includes/class-david-ev-asm-requirements.php:185
 #, php-format
 msgid "%1$s can't be launched due to its requirements violation:"
 msgstr ""
 
-#: includes/class-david-ev-asm-requirements.php:199
+#: includes/class-david-ev-asm-requirements.php:190
 #, php-format
 msgid "%1$s requirement missed"
 msgstr ""
 
-#: includes/class-david-ev-asm-requirements.php:254
+#: includes/class-david-ev-asm-requirements.php:245
 #, php-format
 msgid "%1$s requirements violation:"
 msgstr ""
