@@ -12,6 +12,8 @@ namespace DavidEv\Asm\ApiPlugin\Includes\Modules\Admin;
 use DavidEv\Asm\ApiPlugin\Includes\Modules\Admin\View\David_Ev_Asm_View_Persons;
 use DavidEv\Asm\ApiPlugin\Includes\Storage\David_Ev_Asm_Org_Repository as Org_Repository;
 use DavidEv\Asm\ApiPlugin\Includes\Storage\David_Ev_Asm_Org_Db_Cache as Org_Db_Cache;
+use DavidEv\Asm\ApiPlugin\Includes\Modules\Admin\Interfaces\David_Ev_Asm_Menu_Item_Interface as Menu_Item_Interface;
+use Throwable;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -22,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @package DavidEvAsmApiPlugin
  */
-class David_Ev_Asm_Menu_Persons {
+class David_Ev_Asm_Menu_Persons implements Menu_Item_Interface{
 
 	const PAGE_SLUG = DAVID_E_ASM_ASSET_NAME_PREFIX . 'admin-page';
 
@@ -49,37 +51,32 @@ class David_Ev_Asm_Menu_Persons {
 
 	/**
 	 * David_Ev_Asm_Menu_Item Constructor.
+	 *
+	 * @return void
 	 */
-	public function __construct() {
-		$this->add_admin_options_page();
-		$this->init_data();
+	public function init( string $menu_page_hook ): void {
+		$this->menu_page_hook = $menu_page_hook;
+
+		$this->set_data();
 		$this->bootstrap_page_load();
 	}
 
 	/**
-	 * Add admin area menu item.
+	 * Trigger render content.
 	 *
 	 * @return void
 	 */
-	public function add_admin_options_page(): void {
+	public function display(): void {
+		if(get_current_screen()->id !== $this->menu_page_hook){
+			return;  
+		}
 
-		$this->menu_page_hook = add_menu_page(
-			esc_html__( 'David Ev ASM', 'david-ev-asm-api-plugin' ),
-			esc_html__( 'David Ev ASM', 'david-ev-asm-api-plugin' ),
-			'manage_options',
-			self::PAGE_SLUG,
-			[ $this, 'show' ],
-			'dashicons-screenoptions',
-			100
-		);
-
-		/**
-		 * Fire after admin menu registered in WP
-		 *
-		 * @param string $menu_page_hook Reference to page slug
-		 * @hook david_ev_asm_api_plugin__admin_menu_created
-		 */
-		do_action( 'david_ev_asm_api_plugin__admin_menu_created', $this->menu_page_hook );
+		if ( $this->persons instanceof Throwable ) {
+			$this->view->render_header();
+			$this->view->render_exception( e: $this->persons );
+		} else {
+			$this->view->render_page();
+		}
 	}
 
 	/**
@@ -87,7 +84,7 @@ class David_Ev_Asm_Menu_Persons {
 	 *
 	 * @return void
 	 */
-	private function init_data(): void {
+	private function set_data(): void {
 		$prefix = DAVID_E_ASM_ASSET_NAME_PREFIX;
 		$update = $_POST[ "{$prefix}cache-update" ] ?? false;
 
@@ -98,7 +95,11 @@ class David_Ev_Asm_Menu_Persons {
 			$args['no-cache'] = true;
 		}
 
-		$this->persons = ( new Org_Repository() )->persons_get( $args );
+		try {
+			$this->persons = ( new Org_Repository() )->persons_get( args: $args );
+		} catch ( Throwable $e ) {
+			$this->persons = $e;
+		}
 	}
 
 	/**
@@ -107,7 +108,7 @@ class David_Ev_Asm_Menu_Persons {
 	 * @return void
 	 */
 	private function bootstrap_page_load(): void {
-		add_action( "load-{$this->menu_page_hook}", [ $this, 'config_view' ], 10 );
+		add_action( "load-{$this->menu_page_hook}", [ $this, 'configure_view' ], 10 );
 	}
 
 	/**
@@ -115,7 +116,7 @@ class David_Ev_Asm_Menu_Persons {
 	 *
 	 * @return void
 	 */
-	public function config_view(): void {
+	public function configure_view(): void {
 
 		$screen = get_current_screen();
 
@@ -123,10 +124,12 @@ class David_Ev_Asm_Menu_Persons {
 			return;
 		}
 
-		$args = [
-			'label' => __( 'Number of items per page', 'david-ev-asm-api-plugin' ),
-		];
-		add_screen_option( 'per_page', $args );
+		add_screen_option(
+			'per_page',
+			[
+				'label' => __( 'Number of items per page', 'david-ev-asm-api-plugin' ),
+			]
+		);
 
 		$this->view = new David_Ev_Asm_View_Persons(
 			[
@@ -134,14 +137,5 @@ class David_Ev_Asm_Menu_Persons {
 				'persons'   => $this->persons,
 			]
 		);
-	}
-
-	/**
-	 * Trigger render content.
-	 *
-	 * @return void
-	 */
-	public function show(): void {
-		$this->view->render_page();
 	}
 }

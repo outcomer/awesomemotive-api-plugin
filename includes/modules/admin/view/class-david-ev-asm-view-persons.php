@@ -76,7 +76,7 @@ class David_Ev_Asm_View_Persons extends WP_List_Table {
 	 *
 	 * @return void
 	 */
-	private function render_header(): void {
+	public function render_header(): void {
 		?>
 		<h1><?php esc_html_e( 'The cache of Persons in organization.', 'david-ev-asm-api-plugin' ); ?></h1>
 		<p>
@@ -98,7 +98,7 @@ class David_Ev_Asm_View_Persons extends WP_List_Table {
 	 *
 	 * @return void
 	 */
-	private function render_content(): void {
+	public function render_content(): void {
 
 		$prefix = DAVID_E_ASM_ASSET_NAME_PREFIX;
 		?>
@@ -119,11 +119,11 @@ class David_Ev_Asm_View_Persons extends WP_List_Table {
 	 *
 	 * @return void
 	 */
-	private function render_exception( Throwable $e ): void {
+	public function render_exception( Throwable $e ): void {
 		?>
 		<div class="wrap">
 			<?php // translators: %1$s - error text, %2$s - error file, %3$s - error string in file. ?>
-			<?php echo esc_html( sprintf( __( 'Error render data:  %1$s, %2$s:%3$s.', 'david-ev-asm-api-plugin' ), $e->getMessage(), $e->getFile(), $e->getLine() ) ); ?>
+			<?php echo esc_html( sprintf( __( 'Error render content:  %1$s, %2$s:%3$s.', 'david-ev-asm-api-plugin' ), $e->getMessage(), $e->getFile(), $e->getLine() ) ); ?>
 		</div>
 		<?php
 	}
