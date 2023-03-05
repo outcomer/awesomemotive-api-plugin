@@ -22,6 +22,10 @@ interface David_Ev_Asm_Menu_Item_Interface {
 
 	/**
 	 * Menu page hook setter.
+	 *
+	 * @param string $menu_page_hook Page name registered within WP.
+	 *
+	 * @return void
 	 */
 	public function init( string $menu_page_hook ): void;
 

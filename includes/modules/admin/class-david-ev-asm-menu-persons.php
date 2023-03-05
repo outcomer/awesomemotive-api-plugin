@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @package DavidEvAsmApiPlugin
  */
-class David_Ev_Asm_Menu_Persons implements Menu_Item_Interface{
+class David_Ev_Asm_Menu_Persons implements Menu_Item_Interface {
 
 	const PAGE_SLUG = DAVID_E_ASM_ASSET_NAME_PREFIX . 'admin-page';
 
@@ -52,6 +52,8 @@ class David_Ev_Asm_Menu_Persons implements Menu_Item_Interface{
 	/**
 	 * David_Ev_Asm_Menu_Item Constructor.
 	 *
+	 * @param string $menu_page_hook Page name registered within WP.
+	 *
 	 * @return void
 	 */
 	public function init( string $menu_page_hook ): void {
@@ -67,8 +69,8 @@ class David_Ev_Asm_Menu_Persons implements Menu_Item_Interface{
 	 * @return void
 	 */
 	public function display(): void {
-		if(get_current_screen()->id !== $this->menu_page_hook){
-			return;  
+		if ( get_current_screen()->id !== $this->menu_page_hook ) {
+			return;
 		}
 
 		if ( $this->persons instanceof Throwable ) {

@@ -258,9 +258,9 @@ class David_Ev_Asm_Requirements {
 	 *
 	 * @return void
 	 */
-	public function action_deactivate_plugins() {
+	public function action_deactivate_plugins(): void {
 		if ( ! empty( $this->errors['fatal'] ) ) {
-			deactivate_plugins( basename( DAVID_E_ASM_PLUGIN_DIR) . '/' . basename(DAVID_E_ASM_API_PLUGIN_FILE) );
+			deactivate_plugins( basename( DAVID_E_ASM_PLUGIN_DIR ) . '/' . basename( DAVID_E_ASM_API_PLUGIN_FILE ) );
 		}
 	}
 

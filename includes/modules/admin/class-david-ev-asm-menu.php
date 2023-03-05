@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @package DavidEvAsmApiPlugin
  */
-class David_Ev_Asm_Menu implements Menu_Interface{
+class David_Ev_Asm_Menu implements Menu_Interface {
 
 	/**
 	 * Single instance of the class.
