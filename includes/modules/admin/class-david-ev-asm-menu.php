@@ -73,19 +73,31 @@ class David_Ev_Asm_Menu implements Menu_Interface {
 
 		$menu_page_main_instance = new David_Ev_Asm_Menu_Persons();
 
-		$parent_slug = DAVID_E_ASM_ASSET_NAME_PREFIX . 'org-persons';
+		$root_slug        = DAVID_E_ASM_ASSET_NAME_PREFIX . 'admin-menu';
+		$org_persons_slug = DAVID_E_ASM_ASSET_NAME_PREFIX . 'org-persons';
 
-		$menu_page_parent_hook = add_menu_page(
+		add_menu_page(
 			esc_html__( 'David Ev ASM', 'david-ev-asm-api-plugin' ),
 			esc_html__( 'David Ev ASM', 'david-ev-asm-api-plugin' ),
 			'manage_options',
-			$parent_slug,
+			$root_slug,
 			[ $menu_page_main_instance, 'display' ],
 			'dashicons-screenoptions',
 			100
 		);
 
+		$menu_page_parent_hook = add_submenu_page(
+			$root_slug,
+			esc_html__( 'Org Persons', 'wp-mail-smtp' ),
+			esc_html__( 'Org Persons', 'wp-mail-smtp' ),
+			'manage_options',
+			$org_persons_slug,
+			[ $menu_page_main_instance, 'display' ]
+		);
+
 		$menu_page_main_instance->init( $menu_page_parent_hook );
+
+		remove_submenu_page( $root_slug, $root_slug );
 
 		/**
 		 * Fire after admin menu registered in WP
