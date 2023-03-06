@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: david_ev_asm_api_plugin 1.0\n"
-"POT-Creation-Date: 2023-03-03 17:43+0100\n"
+"POT-Creation-Date: 2023-03-06 21:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -56,13 +56,18 @@ msgstr ""
 msgid "%1$s requirements violation:"
 msgstr ""
 
-#: includes/modules/admin/class-david-ev-asm-menu-persons.php:67
-#: includes/modules/admin/class-david-ev-asm-menu-persons.php:68
+#: includes/modules/admin/class-david-ev-asm-menu-persons.php:132
+msgid "Number of items per page"
+msgstr ""
+
+#: includes/modules/admin/class-david-ev-asm-menu.php:80
+#: includes/modules/admin/class-david-ev-asm-menu.php:81
 msgid "David Ev ASM"
 msgstr ""
 
-#: includes/modules/admin/class-david-ev-asm-menu-persons.php:127
-msgid "Number of items per page"
+#: includes/modules/admin/class-david-ev-asm-menu.php:91
+#: includes/modules/admin/class-david-ev-asm-menu.php:92
+msgid "Org Persons"
 msgstr ""
 
 #: includes/modules/admin/view/class-david-ev-asm-view-persons.php:81
@@ -81,7 +86,7 @@ msgstr ""
 
 #: includes/modules/admin/view/class-david-ev-asm-view-persons.php:126
 #, php-format
-msgid "Error render data:  %1$s, %2$s:%3$s."
+msgid "Error render content:  %1$s, %2$s:%3$s."
 msgstr ""
 
 #: includes/modules/blocks/class-david-ev-asm-block-factory.php:92
